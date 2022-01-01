@@ -8,7 +8,9 @@ const name = readline.question("Please type the name of the movie or show you wo
 const movie = readline.keyInYN(`Is \"${name}\" a movie?`);
 const payTV = readline.keyInYN(`Do you wnat to search through PayTV channels?`);
 
-const nameURL = name.replace(/ /g, "+",);
+let nameURL = encodeURIComponent(name);
+console.log(nameURL);
+nameURL = nameURL.replace(/%20/g, "+");
 
 // &SucheSendergruppen%5B%5D 1 -> Hauptsender
 // &SucheSendergruppen%5B%5D 2 -> Regionalsender
