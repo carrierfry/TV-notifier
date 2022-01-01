@@ -1,10 +1,12 @@
 #!/bin/node
 const readline = require("readline-sync");
+const fs = require('fs');
 
 // console.log("Please type the name of the movie or show you would like to add:");
 
 const name = readline.question("Please type the name of the movie or show you would like to add:\n> ");
-const movie = readline.keyInYN(`Is ${name} a movie?`);
+const movie = readline.keyInYN(`Is \"${name}\" a movie?`);
+const payTV = readline.keyInYN(`Do you wnat to search through PayTV channels?`);
 
 const nameURL = name.replace(/ /g, "+",);
 
@@ -41,11 +43,17 @@ let searchString = `https://www.tvtv.de/suchergebnis?eq=${nameURL}
 &SucheSendergruppen%5B%5D=2
 &SucheSendergruppen%5B%5D=3
 &SucheSendergruppen%5B%5D=4
-&SucheSendergruppen%5B%5D=5
 &SucheSendergruppen%5B%5D=6
 &SucheSendergruppen%5B%5D=284
 &SucheSendergruppen%5B%5D=285
-&SucheSendergruppen%5B%5D=7
 &SucheKategorie%5Bfilm%5D%5B%5D=alle`
 
-console.log(searchString);
+if (payTV) {
+    searchString += "&SucheSendergruppen%5B%5D=5"
+}
+searchString = searchString.replace(/\n/g, "");
+
+// console.log(searchString);
+
+fs.writeFileSync("searches.txt", searchString, { flag: 'a+' });
+console.log(`\"${name}\" was successfully added!`);
