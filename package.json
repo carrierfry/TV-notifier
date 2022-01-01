@@ -1,0 +1,26 @@
+{
+  "name": "tv-notifier",
+  "version": "0.1.0",
+  "description": "",
+  "main": "search.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carrierfry/TV-notifier.git"
+  },
+  "keywords": [
+    "TV",
+    "search"
+  ],
+  "author": "carrierfry",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/carrierfry/TV-notifier/issues"
+  },
+  "homepage": "https://github.com/carrierfry/TV-notifier#readme",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
+}
