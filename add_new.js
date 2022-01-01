@@ -2,6 +2,8 @@
 const readline = require("readline-sync");
 const fs = require('fs');
 
+const filename = "searches.json";
+
 // console.log("Please type the name of the movie or show you would like to add:");
 
 const name = readline.question("Please type the name of the movie or show you would like to add:\n> ");
@@ -55,7 +57,20 @@ if (payTV) {
 }
 searchString = searchString.replace(/\n/g, "");
 
+let searchJSON = {
+    url: searchString,
+    name: name,
+}
+
 // console.log(searchString);
 
-fs.writeFileSync("searches.txt", searchString, { flag: 'a+' });
+let urls;
+try {
+    urls = JSON.parse(fs.readFileSync(filename, "utf8"));
+} catch (e) {
+    urls = [];
+}
+urls.push(searchJSON);
+
+fs.writeFileSync(filename, JSON.stringify(urls) + "\n", { flag: 'w' });
 console.log(`\"${name}\" was successfully added!`);

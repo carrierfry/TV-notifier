@@ -4,7 +4,8 @@
   "description": "",
   "main": "search.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "new": "node add_new.js",
+    "start": "node search.js"
   },
   "repository": {
     "type": "git",

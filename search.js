@@ -1,17 +1,26 @@
 #!/bin/node
 
+const filename = "searches.json";
+
 async function mainFunc() {
     const fs = require('fs');
 
-    const urlsFile = fs.readFileSync("searches.txt", "utf8")
-    const urls = urlsFile.split("\n");
+    let urlsFile;
+    try {
+        urlsFile = JSON.parse(fs.readFileSync(filename, "utf8"));
+    } catch (e) {
+        console.log("You haven't added a search yet! Run \"npm run new\"");
+        return;
+    }
+    const urls = urlsFile;
 
     let hits = [];
 
     for (let i = 0; i < urls.length; i++) {
         let url = urls[i];
 
-        let body = await downloadPage(url);
+        if (url.url === "") continue;
+        let body = await downloadPage(url.url);
         body.split("\n").forEach(line => {
             if (line.includes("openDetailPopup")) {
                 if (!line.includes("lazyload")) {
